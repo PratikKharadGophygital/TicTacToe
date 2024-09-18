@@ -51,5 +51,13 @@ jobs:
 
       - name: Unzip Artifact
         run: Expand-Archive -Path "D:\IIS\TicTacToeRunner\ZipFile\published.zip" -DestinationPath "D:\IIS\TicTacToeRunner\Build" -Force
+
+      - name: Start Specific IIS Website
+        run: |
+          Start-Sleep -Seconds 20
+          $appPoolName = 'TicTacToe'
+          Import-Module WebAdministration
+          Start-WebAppPool -Name $appPoolName
+          PowerShell -Command "Start-WebSite -Name 'TicTacToe'"
    
 
