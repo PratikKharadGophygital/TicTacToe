@@ -41,4 +41,15 @@ jobs:
         if: ${{ success() }}
         run: Compress-Archive -Path "D:\IIS\TicTacToeRunner\actions-runner\_work\TicTacToe\TicTacToe\publish\*" -DestinationPath "D:\IIS\TicTacToeRunner\ZipFile\published.zip" -Force
 
+      - name: Stop Specific IIS Website
+        run: |
+          $appPoolName = 'TicTacToe'
+          Import-Module WebAdministration
+          Stop-WebAppPool -Name $appPoolName
+          PowerShell -Command "Stop-WebSite -Name 'TicTacToe'"
+          Start-Sleep -Seconds 20
+
+      - name: Unzip Artifact
+        run: Expand-Archive -Path "D:\IIS\TicTacToeRunner\ZipFile\published.zip" -DestinationPath "D:\IIS\TicTacToeRunner\Build" -Force
+   
 
