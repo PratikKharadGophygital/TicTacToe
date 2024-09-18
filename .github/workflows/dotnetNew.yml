@@ -1,0 +1,63 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Clean Dependencies 
+        run: dotnet clean
+        working-directory: D:\IIS\TicTacToeRunner\actions-runner\_work\TicTacToe\TicTacToe
+
+      - name: Restore dependencies
+        run: dotnet restore
+        working-directory: D:\IIS\TicTacToeRunner\actions-runner\_work\TicTacToe\TicTacToe
+
+      - name: Build
+        run: dotnet build --no-restore
+        working-directory: D:\IIS\TicTacToeRunner\actions-runner\_work\TicTacToe\TicTacToe
+
+      - name: Publish Build
+        run: dotnet publish --configuration Release --output publish
+        working-directory: D:\IIS\TicTacToeRunner\actions-runner\_work\TicTacToe\TicTacToe
+       
+      - name: Zip Publish Folder
+        if: ${{ success() }}
+        run: Compress-Archive -Path "D:\IIS\TicTacToeRunner\actions-runner\_work\TicTacToe\TicTacToe\publish\*" -DestinationPath "D:\IIS\TicTacToeRunner\ZipFile\published.zip" -Force
+
+      - name: Stop Specific IIS Website
+        run: |
+          $appPoolName = 'TicTacToe'
+          Import-Module WebAdministration
+          Stop-WebAppPool -Name $appPoolName
+          PowerShell -Command "Stop-WebSite -Name 'TicTacToe'"
+          Start-Sleep -Seconds 20
+
+      - name: Unzip Artifact
+        run: Expand-Archive -Path "D:\IIS\TicTacToeRunner\ZipFile\published.zip" -DestinationPath "D:\IIS\TicTacToeRunner\Build" -Force
+
+      - name: Start Specific IIS Website
+        run: |
+          Start-Sleep -Seconds 20
+          $appPoolName = 'TicTacToe'
+          Import-Module WebAdministration
+          Start-WebAppPool -Name $appPoolName
+          PowerShell -Command "Start-WebSite -Name 'TicTacToe'"
+   
+
