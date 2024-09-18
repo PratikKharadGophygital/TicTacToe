@@ -1,0 +1,153 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="~/js/site.js"></script>
+    <script>
+
+        $(".child").click(function (e) {
+            var divId = $(this).find("input").val(); // Find the input inside the clicked .child and get its value
+            alert(divId); // Display the value in an alert
+            console.log("Enter ");
+        });
+    </script>
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        #parent {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            width: 120px;
+            height: 112px;
+            border: 2px solid rgb(146, 221, 221);
+            border-radius: 1%;
+            box-sizing: border-box;
+            margin-top: -30px;
+        }
+
+        .child {
+            border: 1px solid rgb(167, 241, 241);
+            border-radius: 2%;
+            box-sizing: border-box;
+            background-color: rgb(234, 240, 240);
+            font-size: 9px;
+            width: auto;
+            height: auto;
+        }
+
+        img {
+            width: 93%;
+            text-align: center;
+        }
+
+        #Adiv {
+            font-size: 8px;
+            margin-left: -560%;
+        }
+        #parent1 {
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="parent" class="card-body shadow-lg p-3 mb-5 bg-body rounded">
+        <div class="child" onclick="magic(1)">
+            <input type="hidden" id="div1" value="Hii">
+            <input type="hidden" id="counter" value=1>
+            <input type="hidden" id="result1">
+            <input type="hidden" id="outerCounter" value=0>
+            <img id="img1" src="">
+        </div>
+        <div class="child" onclick="magic(2)">
+            <input type="hidden" id="div2">
+            <input type="hidden" id="result2">
+            <img id="img2" src="">
+        </div>
+        <div class="child" onclick="magic(3)">
+            <input type="hidden" id="div3">
+            <input type="hidden" id="result3">
+            <img id="img3" src="">
+        </div>
+        <div class="child" onclick="magic(4)">
+            <input type="hidden" id="div4">
+            <input type="hidden" id="result4">
+            <img id="img4" src="">
+        </div>
+        <div class="child" onclick="magic(5)">
+            <input type="hidden" id="div5">
+            <input type="hidden" id="result5">
+            <img id="img5" src="">
+        </div>
+        <div class="child" onclick="magic(6)">
+            <input type="hidden" id="div6">
+            <input type="hidden" id="result6">
+            <img id="img6" src="">
+        </div>
+        <div class="child" onclick="magic(7)">
+            <input type="hidden" id="div7">
+            <input type="hidden" id="result7">
+            <img id="img7" src="">
+        </div>
+        <div class="child" onclick="magic(8)">
+            <input type="hidden" id="div8">
+            <input type="hidden" id="result8">
+            <img id="img8" src="">
+        </div>
+        <div class="child" onclick="magic(9)">
+            <input type="hidden" id="div9">
+            <input type="hidden" id="result9">
+            <img id="img9" src="">
+        </div>
+
+
+    </div>
+    </br></br></br></br></br></br>
+    <div id="parent1" class="card-body">
+        <!-- <div id="Adiv" class="">
+            <div>
+            </div>           
+            
+        </div>
+        <div class="col-md-12" >
+            <div id="Adiv" class="">
+                <div>
+                    <a href="Home.html">Reset</a>
+                </div>           
+                
+            </div>
+            <input type="text" id="" placeholder="             1st User" style="font-size: 3px;
+            margin-top: 2%;
+            margin-left: -173%;" >
+        </div> -->
+        <div id="winMessage"
+            style="display:none; position: fixed; top: 36%; left: 33%; transform: translate(-50%, -50%); font-size: 2em; color: green; text-align: center;">
+            You Win!
+        </div>
+        <div id="tieMessage"
+            style="display:none; position: fixed; top: 36%; left: 33%; transform: translate(-50%, -50%); font-size: 2em; color: red; text-align: center;">
+            It's a Tie!
+        </div>
+    </div>
+</body>
+
+</html>
