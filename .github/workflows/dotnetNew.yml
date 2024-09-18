@@ -23,12 +23,12 @@ jobs:
 
       - name: Clean Dependencies 
         run: dotnet clean
-        working-directory: F:\runner\actions-runner\_work\Tic_Tac_Toe\Tic_Tac_Toe
+        working-directory: D:\IIS\TicTacToeRunner\actions-runner\_work\TicTacToe\TicTacToe
 
       - name: Restore dependencies
         run: dotnet restore
-        working-directory: D:\IIS\TicTacToeRunner\actions-runner\_work\Tic_Tac_Toe\Tic_Tac_Toe
+        working-directory: D:\IIS\TicTacToeRunner\actions-runner\_work\TicTacToe\TicTacToe
 
       - name: Build
         run: dotnet build --no-restore
-        working-directory: F:\runner\aD:\IIS\TicTacToeRunner\actions-runner\_work\Tic_Tac_Toe\Tic_Tac_Toe
+        working-directory: D:\IIS\TicTacToeRunner\actions-runner\_work\TicTacToe\TicTacToe
