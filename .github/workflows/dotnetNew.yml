@@ -43,11 +43,7 @@ jobs:
 
       - name: Stop Specific IIS Website
         run: |
-          $appPoolName = 'TicTacToe'
-          Import-Module WebAdministration
-          Stop-WebAppPool -Name $appPoolName
-          PowerShell -Command "Stop-WebSite -Name 'TicTacToe'"
-          Start-Sleep -Seconds 20
+          Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `Import-Module WebAdministration; Stop-WebAppPool -Name 'TicTacToe'; Stop-WebSite -Name 'TicTacToe'; Start-Sleep -Seconds 20`" -Verb RunAs
 
       - name: Unzip Artifact
         run: Expand-Archive -Path "D:\IIS\TicTacToeRunner\ZipFile\published.zip" -DestinationPath "D:\IIS\TicTacToeRunner\Build" -Force
