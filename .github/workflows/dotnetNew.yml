@@ -32,3 +32,13 @@ jobs:
       - name: Build
         run: dotnet build --no-restore
         working-directory: D:\IIS\TicTacToeRunner\actions-runner\_work\TicTacToe\TicTacToe
+
+      - name: Publish Build
+        run: dotnet publish --configuration Release --output publish
+        working-directory: D:\IIS\TicTacToeRunner\actions-runner\_work\TicTacToe\TicTacToe
+       
+      - name: Zip Publish Folder
+        if: ${{ success() }}
+        run: Compress-Archive -Path "D:\IIS\TicTacToeRunner\actions-runner\_work\TicTacToe\TicTacToe\publish\*" -DestinationPath "D:\IIS\TicTacToeRunner\ZipFile\published.zip" -Force
+
+
